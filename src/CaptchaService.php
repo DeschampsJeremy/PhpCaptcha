@@ -116,7 +116,7 @@ class CaptchaService
         $captcha = random_int(0, 9);
         $captcha .= self::charLower();
         $captcha .= self::charUpper();
-        for ($i = strlen($captcha); $i <= $size; $i++) {
+        for ($i = strlen($captcha); $i < $size; $i++) {
             switch (random_int(0, 2)) {
                 case 0:
                     $captcha .= random_int(0, 9);
