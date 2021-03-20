@@ -113,13 +113,13 @@ class CaptchaService
      */
     private static function getTextCaptcha(int $size = 5): string
     {
-        $captcha = random_int(0, 9);
+        $captcha = random_int(1, 9);
         $captcha .= self::charLower();
         $captcha .= self::charUpper();
         for ($i = strlen($captcha); $i < $size; $i++) {
             switch (random_int(0, 2)) {
                 case 0:
-                    $captcha .= random_int(0, 9);
+                    $captcha .= random_int(1, 9);
                     break;
                 case 1:
                     $captcha .= self::charLower();
@@ -142,7 +142,11 @@ class CaptchaService
      */
     private static function charLower(): string
     {
-        return (string) chr(random_int(97, 122));
+        if (random_int(0, 1)) {
+            return (string) chr(random_int(97, 110));
+        } else {
+            return (string) chr(random_int(112, 122));
+        }
     }
 
     /**
@@ -151,7 +155,7 @@ class CaptchaService
      */
     private static function charUpper(): string
     {
-        return (string) chr(random_int(65, 90));
+        return strtoupper(self::charLower());
     }
 
     /**
